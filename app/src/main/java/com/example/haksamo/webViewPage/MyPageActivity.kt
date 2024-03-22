@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.example.haksamo.JavascriptCallbackClient
-import com.example.haksamo.R
 import com.example.haksamo.databinding.ActivityMyPageBinding
 
 class MyPageActivity : AppCompatActivity() {

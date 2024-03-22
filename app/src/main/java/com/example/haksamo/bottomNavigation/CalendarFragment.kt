@@ -21,6 +21,7 @@ import com.example.haksamo.calendar.TodoFragment
 import com.example.haksamo.databinding.FragmentCalendarBinding
 import com.example.haksamo.room.MyDatabase
 import com.example.haksamo.room.SchoolDatabase
+import com.example.haksamo.webViewPage.AlarmPageActivity
 import com.example.haksamo.webViewPage.MyPageActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -53,7 +54,8 @@ class CalendarFragment : Fragment() {
 
     private fun setButton() {
         binding.alarm.setOnClickListener {
-
+            val intent = Intent(requireContext(), AlarmPageActivity::class.java)
+            startActivity(intent)
         }
         binding.mypage.setOnClickListener {
             val intent = Intent(requireContext(), MyPageActivity::class.java)

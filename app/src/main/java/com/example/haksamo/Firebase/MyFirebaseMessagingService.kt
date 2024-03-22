@@ -14,6 +14,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.example.haksamo.MainActivity
+import com.example.haksamo.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -29,12 +30,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.d(TAG, "Refreshed token: $token")
-
-        // 토큰 값을 따로 저장
-        //val pref = this.getSharedPreferences("token", Context.MODE_PRIVATE)
-        //val editor = pref.edit()
-        //editor.putString("token", token).apply()
-        //editor.commit()
     }
 
     // 서버에서 토큰을 이용해 POST 요청 메시지를 보내면, Firebase 서버에서 디바이스로 메시지를 전송.
@@ -50,7 +45,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         if (isNotificationPermissionGranted()) {
             // 알림 권한이 허용된 경우에만 알림을 보냅니다.
-            if (remoteMessage.data != null) {
+            if (remoteMessage.notification != null) {
                 sendNotification(remoteMessage)
             } else {
                 Log.d(TAG, "수신 에러: Notification이 비어있습니다.")
@@ -63,10 +58,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun sendNotification(remoteMessage: RemoteMessage) {
         Log.d(TAG, "sendNotification 함수 실행됨")
 
-        // 데이터 페이로드에서 title과 body 추출
+
+        val title = remoteMessage.notification!!.title
+        val body = remoteMessage.notification!!.body
         val dataPayload = remoteMessage.data
-        val title = dataPayload["title"]
-        val body = dataPayload["body"]
+        //데이터 페이로드에서 title과 body 추출
+        //val title = dataPayload["title"]
+        // val body = dataPayload["body"]
 
 
         // 알림을 클릭하면 해당 화면으로 이동
@@ -92,10 +90,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // 알램 채널 생성 (API 26부터 - 오레오 버전 이후)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                channelId,
-                channelName,
-                NotificationManager.IMPORTANCE_HIGH // 중요도를 HIGH로 설정
-            ).apply {
+                channelId, channelName, NotificationManager.IMPORTANCE_HIGH).apply {  // 중요도를 HIGH로 설정
                 description = channelDescription
             }
             notificationManager.createNotificationChannel(channel)
@@ -108,9 +103,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val notification = NotificationCompat.Builder(this, channelId)
             .setContentTitle(title) // 제목
             .setContentText(body)   // 내용
-            .setSmallIcon(android.R.drawable.ic_dialog_info)    // 아이콘 설정
+            .setSmallIcon(R.drawable.alarm_logo)
             .setAutoCancel(true) // 클릭시 삭제
-            .setPriority(NotificationCompat.PRIORITY_HIGH )
+            .setPriority(NotificationCompat.PRIORITY_HIGH ) // 우선 순위 높음
             .setSound(soundUri)
             .setContentIntent(pendingIntent)
 

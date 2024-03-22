@@ -3,19 +3,17 @@ package com.example.haksamo.bottomNavigation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.webkit.JavascriptInterface
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import com.example.haksamo.JavascriptCallbackClient
 import com.example.haksamo.databinding.FragmentHomeBinding
+import com.example.haksamo.webViewPage.AlarmPageActivity
 import com.example.haksamo.webViewPage.MyPageActivity
 
 
@@ -44,7 +42,8 @@ class HomeFragment : Fragment() {
 
     private fun setButton() {
         binding.alarm.setOnClickListener {
-
+            val intent = Intent(requireContext(), AlarmPageActivity::class.java)
+            startActivity(intent)
         }
         binding.mypage.setOnClickListener {
             val intent = Intent(requireContext(), MyPageActivity::class.java)

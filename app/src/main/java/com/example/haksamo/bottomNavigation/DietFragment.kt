@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.haksamo.R
 import com.example.haksamo.databinding.FragmentDietBinding
+import com.example.haksamo.webViewPage.AlarmPageActivity
 import com.example.haksamo.webViewPage.MyPageActivity
 
 
@@ -28,7 +29,8 @@ class DietFragment : Fragment() {
 
     private fun setButton() {
         binding.alarm.setOnClickListener {
-
+            val intent = Intent(requireContext(), AlarmPageActivity::class.java)
+            startActivity(intent)
         }
         binding.mypage.setOnClickListener {
             val intent = Intent(requireContext(), MyPageActivity::class.java)

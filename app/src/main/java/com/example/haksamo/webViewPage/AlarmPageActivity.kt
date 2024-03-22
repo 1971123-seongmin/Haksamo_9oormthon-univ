@@ -16,8 +16,8 @@ class AlarmPageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //initWebView()
         binding = ActivityAlarmPageBinding.inflate(layoutInflater)
+        initWebView()
         setContentView(binding.root)
     }
 
@@ -27,7 +27,7 @@ class AlarmPageActivity : AppCompatActivity() {
         webSettings = webView.settings
         webSettings.setJavaScriptEnabled(true)
         webView.webViewClient = WebViewClient()
-        webView.loadUrl("http://haksamo.site/mypage")
+        webView.loadUrl("http://haksamo.site/notice")
     }
 
     override fun onBackPressed() {

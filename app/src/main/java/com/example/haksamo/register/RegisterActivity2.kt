@@ -21,6 +21,9 @@ class RegisterActivity2 : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        // 전송 버튼 -> 이메일로 인증번호 전송
+        //  gMailSender = GMailSender()
+        //   gMailSender.sendEmali(email)
         binding.sendBtn.setOnClickListener {
             setTimer()
             binding.certificationEdit.visibility = View.VISIBLE
@@ -48,7 +51,7 @@ class RegisterActivity2 : AppCompatActivity() {
 
     }
 
-    fun setTimer() {
+    private fun setTimer() {
          timer = object : CountDownTimer(5 * 60 * 1000, 1000) { // 5분 타이머, 1초마다 갱신
             override fun onTick(millisUntilFinished: Long) {
                 // 타이머가 갱신될 때마다 호출되는 콜백
