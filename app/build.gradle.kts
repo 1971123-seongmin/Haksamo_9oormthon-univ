@@ -78,6 +78,7 @@ dependencies {
     implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
 
     implementation ("com.squareup.okhttp3:okhttp:4.9.2")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
     // 이메일 전송 (SMTP - Gmali)
     implementation(files("libs/activation.jar"))

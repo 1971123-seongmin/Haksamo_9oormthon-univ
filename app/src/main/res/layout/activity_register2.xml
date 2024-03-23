@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -107,10 +108,11 @@
         android:layout_marginTop="21dp"
         android:backgroundTint="#E40606"
         android:hint="인증번호를 입력하세요"
-        android:inputType="textEmailAddress"
+        android:inputType="number"
         android:maxLines="1"
         android:singleLine="true"
         android:textColorHint="#E40606"
+        android:maxLength="6"
         android:textSize="12dp"
 
         app:layout_constraintStart_toStartOf="parent"

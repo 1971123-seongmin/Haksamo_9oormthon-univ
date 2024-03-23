@@ -8,6 +8,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
@@ -15,6 +16,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.example.haksamo.MainActivity
 import com.example.haksamo.R
+import com.example.haksamo.token.App
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -23,7 +25,7 @@ import com.google.firebase.messaging.RemoteMessage
  * 2. Data: 실행중이거나 백그라운드(앱이 실행중이지 않을때) 알림이 옴 -> TODO: 대부분 사용하는 방식 */
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-    private val TAG = "로그"
+    private val TAG = "알림"
 
     // Firebase가 해당 디바이스에 새로운 토큰을 부여할 때마다 자동으로 호출되는 함수
     // Token은 주로 최초 설치하거나, 데이터를 삭제하고 앱에 진입하게 되면 발급
@@ -61,6 +63,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val title = remoteMessage.notification!!.title
         val body = remoteMessage.notification!!.body
+        val imgUrl = remoteMessage.notification!!.imageUrl
+        val boardId = remoteMessage.data
+        Log.d("알림", "$title, $body, $imgUrl, $boardId")
+      // val boardId = remoteMessage.notification.
+
         val dataPayload = remoteMessage.data
         //데이터 페이로드에서 title과 body 추출
         //val title = dataPayload["title"]
@@ -98,12 +105,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         // 알림 소리
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val largeImg = BitmapFactory.decodeResource(resources, R.drawable.alarm_logo)
 
         // 알림 생성
         val notification = NotificationCompat.Builder(this, channelId)
             .setContentTitle(title) // 제목
             .setContentText(body)   // 내용
             .setSmallIcon(R.drawable.alarm_logo)
+            .setLargeIcon(largeImg)
             .setAutoCancel(true) // 클릭시 삭제
             .setPriority(NotificationCompat.PRIORITY_HIGH ) // 우선 순위 높음
             .setSound(soundUri)

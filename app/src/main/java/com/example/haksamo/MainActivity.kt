@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         requestNotificationPermission()
-        FirebaseApp.initializeApp(this)
-        getFCMToken()
+        //FirebaseApp.initializeApp(this)
+        //getFCMToken()
 
         setBottomNavigationView()
 
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         var token: String? = null
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
-                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                Log.d(TAG, "Fetching FCM registration token failed", task.exception)
                 return@OnCompleteListener
             }
 

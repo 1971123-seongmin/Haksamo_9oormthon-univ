@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="130dp"
         android:background="#E6F4FB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,23 +61,6 @@
             android:textAlignment="center"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/edit_search"
-            android:background="@drawable/edit_search"
-            android:paddingStart="45dp"
-            android:hint="글, 제목, 키워드, 해시태그"
-            android:textSize="14dp"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:gravity="center_vertical"
-            android:layout_width="314dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="137dp"
-            android:layout_marginEnd="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

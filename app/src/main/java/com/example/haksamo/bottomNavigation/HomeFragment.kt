@@ -3,6 +3,7 @@ package com.example.haksamo.bottomNavigation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -35,7 +36,6 @@ class HomeFragment : Fragment() {
 
         setButton()
         initWebView()
-        focusEditText()
 
         return binding.root
     }
@@ -56,51 +56,25 @@ class HomeFragment : Fragment() {
         webView = binding.webView
         webSettings = webView.settings
         webSettings.setJavaScriptEnabled(true)
-        webView.webViewClient = WebViewClient()
+        webView.webViewClient = MyWebViewClient()
         webView.loadUrl("http://haksamo.site/")
     }
 
-    // EditText focus 함수
-    private fun focusEditText() {
-        binding.editSearch.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) {
-                // EditText 포커스 있을 때
-                binding.alarm.visibility = View.INVISIBLE
-                binding.mypage.visibility = View.INVISIBLE
-                binding.universityName.visibility = View.INVISIBLE
-                binding.webView.visibility = View.INVISIBLE
+    private inner class MyWebViewClient : WebViewClient() {
+        override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+            // 페이지를 로드할 때마다 호출되며, 페이지 이동을 허용할 것인지 여부를 결정
+            if (url.startsWith("http://haksamo.site/post/")) {
+                // 페이지가 hacsamo.com/mypage인 경우 EditText 숨기기
+                Log.d("로그", "startswith")
+
             } else {
-                // EditText 포커스 없을 때
-                binding.alarm.visibility = View.VISIBLE
-                binding.mypage.visibility = View.VISIBLE
-                binding.universityName.visibility = View.VISIBLE
-                binding.webView.visibility = View.VISIBLE
+                // 다른 페이지인 경우 EditText 보이기
+
             }
-        }
-
-        // 레이아웃의 다른 부분을 터치했을 때 포커스 해제
-        binding.root.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-
-                if (binding.editSearch.hasFocus()) {
-                    binding.editSearch.clearFocus() // EditText의 포커스 해제
-                }
-
-                // 키보드 숨기기
-                val manager =
-                    requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                manager.hideSoftInputFromWindow(
-                    requireActivity().window.decorView.windowToken,
-                    InputMethodManager.HIDE_NOT_ALWAYS
-                )
-                true
-            }
-            else {
-                false
-            }
-
+            return false
         }
     }
+
 
     fun onBackPressed() {
         // 웹뷰에서 뒤로가기 동작 수행
